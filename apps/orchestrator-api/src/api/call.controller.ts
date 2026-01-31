@@ -31,6 +31,32 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
 });
 
 /**
+ * GET /calls
+ * List calls (optional ?status=ACTIVE)
+ */
+router.get('/', async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const status = req.query.status as string;
+    // Basic validation of status enum
+    const filter = status ? { status: status as any } : undefined;
+    
+    const calls = await callService.listCalls(filter);
+    
+    res.json({
+      calls: calls.map(call => ({
+        call_id: call.id,
+        room_name: call.roomName,
+        status: call.status,
+        started_at: call.startedAt?.toISOString() || null,
+        created_at: call.createdAt.toISOString(),
+      })),
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+/**
  * POST /calls/:id/start
  * Start a call (CREATED → ACTIVE)
  */

@@ -5,6 +5,7 @@ import { transcriptService } from './transcript.service.js';
 import { CallStatus, InvalidTransitionError, isValidTransition } from '../models/call.model.js';
 import { EventType } from '../models/event.model.js';
 import { eventQueue } from '../queues/async.events.js';
+import { AccessToken } from 'livekit-server-sdk';
 
 const prisma = new PrismaClient();
 
@@ -24,6 +25,7 @@ export interface HandoffResult {
   success: boolean;
   call_id: string;
   context: ContextSnapshot | null;
+  access_token?: string;
   message: string;
 }
 
@@ -187,10 +189,28 @@ export class HandoffService {
       // Mark as handed off
       await this.markHandedOff(callId);
 
+      // Generate LiveKit Token for Human Agent
+      const at = new AccessToken(
+        process.env.LIVEKIT_API_KEY!,
+        process.env.LIVEKIT_API_SECRET!,
+        {
+          identity: `agent_human_${callId}`,
+          name: "Human Agent",
+        }
+      );
+
+      at.addGrant({
+        roomJoin: true,
+        room: call.roomName,
+        canPublish: true,
+        canSubscribe: true,
+      });
+
       return {
         success: true,
         call_id: callId,
         context,
+        access_token: await at.toJwt(),
         message: 'Handoff successful',
       };
     } catch (error) {

@@ -10,6 +10,8 @@ import {
   CallNotFoundError,
 } from '../models/call.model.js';
 
+import { AccessToken } from 'livekit-server-sdk';
+
 const prisma = new PrismaClient();
 
 /**
@@ -24,7 +26,7 @@ export class CallService {
   /**
    * Creates a new call record and generates a unique room name.
    */
-  async createCall(data: CreateCallRequest): Promise<CreateCallResponse> {
+  async createCall(data: CreateCallRequest): Promise<CreateCallResponse & { access_token: string }> {
     const callId = nanoid(12);
     const roomName = `call_${callId}`;
 
@@ -37,9 +39,27 @@ export class CallService {
       },
     });
 
+    // Generate LiveKit Token for Driver
+    const at = new AccessToken(
+      process.env.LIVEKIT_API_KEY,
+      process.env.LIVEKIT_API_SECRET,
+      {
+        identity: `driver_${call.id}`,
+        name: "Driver",
+      }
+    );
+
+    at.addGrant({
+      roomJoin: true,
+      room: roomName,
+      canPublish: true,
+      canSubscribe: true,
+    });
+
     return {
       call_id: call.id,
       room_name: call.roomName,
+      access_token: await at.toJwt(),
     };
   }
 
@@ -61,7 +81,14 @@ export class CallService {
       },
     });
 
-    return this.mapToCall(updated);
+    const updatedCall = this.mapToCall(updated);
+    
+    // Emit call active event
+    import('../queues/async.events.js').then(({ eventQueue }) => {
+      eventQueue.emit('call_active', { callId: updatedCall.id, roomName: updatedCall.roomName });
+    });
+
+    return updatedCall;
   }
 
   /**
@@ -99,6 +126,24 @@ export class CallService {
     }
 
     return this.mapToCall(call);
+  }
+
+  /**
+   * Lists calls with optional filtering.
+   */
+  async listCalls(filter?: { status?: CallStatus }): Promise<Call[]> {
+    const where: any = {};
+    if (filter?.status) {
+      where.status = filter.status;
+    }
+
+    const calls = await prisma.call.findMany({
+      where,
+      orderBy: { createdAt: 'desc' },
+      take: 50,
+    });
+
+    return calls.map(this.mapToCall);
   }
 
   /**
