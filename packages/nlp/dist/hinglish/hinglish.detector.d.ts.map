@@ -1,1 +1,0 @@
-{"version":3,"file":"hinglish.detector.d.ts","sourceRoot":"","sources":["../../src/hinglish/hinglish.detector.ts"],"names":[],"mappings":"AAGA;;GAEG;AACH,qBAAa,gBAAgB;IAC3B,OAAO,CAAC,QAAQ,CAAC,gBAAgB,CAAO;IAExC,UAAU,CAAC,IAAI,EAAE,MAAM,GAAG;QAAE,UAAU,EAAE,OAAO,CAAC;QAAC,UAAU,EAAE,MAAM,CAAA;KAAE;CAqBtE;AAED,eAAO,MAAM,gBAAgB,kBAAyB,CAAC"}

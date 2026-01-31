@@ -1,1 +1,0 @@
-{"version":3,"file":"detect.language.d.ts","sourceRoot":"","sources":["../../src/language/detect.language.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,uBAAuB,EAAE,MAAM,qBAAqB,CAAC;AAE9D;;;GAGG;AACH,qBAAa,gBAAgB;IAC3B;;OAEG;IACG,cAAc,CAAC,IAAI,EAAE,MAAM,GAAG,OAAO,CAAC,uBAAuB,CAAC;CAqBrE;AAED,eAAO,MAAM,gBAAgB,kBAAyB,CAAC"}

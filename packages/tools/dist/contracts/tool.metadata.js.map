@@ -1,1 +1,0 @@
-{"version":3,"file":"tool.metadata.js","sourceRoot":"","sources":["../../src/contracts/tool.metadata.ts"],"names":[],"mappings":"AAEA;;GAEG;AACH,MAAM,UAAU,kBAAkB,CAAC,SAA6E;IAC9G,OAAO;QACL,UAAU,EAAE,IAAI;QAChB,oBAAoB,EAAE,KAAK;QAC3B,mBAAmB,EAAE,IAAI;QACzB,2BAA2B,EAAE,KAAK;QAClC,GAAG,SAAS;KACb,CAAC;AACJ,CAAC"}

@@ -1,1 +1,0 @@
-{"version":3,"file":"frame.buffer.d.ts","sourceRoot":"","sources":["../../src/frames/frame.buffer.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,UAAU,EAAuG,MAAM,kBAAkB,CAAC;AAEnJ;;GAEG;AACH,qBAAa,WAAW;IACtB,OAAO,CAAC,MAAM,CAAiC;IAC/C,OAAO,CAAC,aAAa,CAAa;IAElC;;OAEG;IACH,IAAI,CAAC,KAAK,EAAE,UAAU,EAAE,SAAS,CAAC,EAAE,MAAM,GAAG,UAAU,EAAE;IAgCzD;;OAEG;IACH,KAAK,IAAI,IAAI;CAId"}

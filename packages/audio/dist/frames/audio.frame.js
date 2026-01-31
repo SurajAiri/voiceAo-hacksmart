@@ -1,5 +1,0 @@
-export const CANONICAL_SAMPLE_RATE = 16000;
-export const CANONICAL_CHANNELS = 1;
-export const CANONICAL_FRAME_DURATION_MS = 20;
-export const CANONICAL_SAMPLES_PER_FRAME = (CANONICAL_SAMPLE_RATE * CANONICAL_FRAME_DURATION_MS) / 1000;
-//# sourceMappingURL=audio.frame.js.map

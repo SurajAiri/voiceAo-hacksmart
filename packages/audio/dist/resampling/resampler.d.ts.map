@@ -1,1 +1,0 @@
-{"version":3,"file":"resampler.d.ts","sourceRoot":"","sources":["../../src/resampling/resampler.ts"],"names":[],"mappings":"AAAA;;GAEG;AACH,qBAAa,SAAS;IACpB;;OAEG;IACH,MAAM,CAAC,QAAQ,CACb,IAAI,EAAE,UAAU,EAChB,cAAc,EAAE,MAAM,EACtB,YAAY,EAAE,MAAM,GACnB,UAAU;IAyBb;;OAEG;IACH,MAAM,CAAC,MAAM,CAAC,IAAI,EAAE,UAAU,EAAE,QAAQ,EAAE,MAAM,GAAG,UAAU;CAkB9D"}
